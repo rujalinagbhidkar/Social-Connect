@@ -30,6 +30,7 @@ SocialConnect is a minimalist social media platform built using **Flask** and **
 The structure adheres to standard Flask best practices, utilizing Blueprints for modularity.
 
 social_media_app/
+
 ├── app.py
 ├── auth.py
 ├── database.py
