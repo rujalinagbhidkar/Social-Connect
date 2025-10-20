@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <h1>Welcome to SocialConnect</h1>
+        <p>Connect, Share, and Engage with Friends</p>
+        <div class="cta-buttons">
+            <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Get Started</a>
+            <a href="{{ url_for('auth.login') }}" class="btn btn-secondary">Login</a>
+        </div>
+    </div>
+</div>
+
+<div class="features">
+    <div class="container">
+        <h2>Features</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="icon">✍️</span>
+                <h3>Create Posts</h3>
+                <p>Share your thoughts and moments</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🖼️</span>
+                <h3>Share Images</h3>
+                <p>Upload and share photos</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">❤️</span>
+                <h3>Like & Comment</h3>
+                <p>Engage with posts</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+

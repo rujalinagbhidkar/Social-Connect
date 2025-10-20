@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="container dashboard">
+    <div class="dashboard-header">
+        <h1>Welcome, {{ session.username }}!</h1>
+        <a href="{{ url_for('posts.create_post_route') }}" class="btn btn-primary">Create New Post</a>
+    </div>
+    
+    <div class="posts-feed">
+        {% if posts %}
+            {% for post in posts %}
+            <div class="post-card">
+                <div class="post-header">
+                    <div class="post-author">
+                        {# FIX 1: Change post.username[0].upper() to post.author.username[0].upper() #}
+                        <span class="avatar">{{ post.author.username[0].upper() }}</span>
+                        <div>
+                            {# FIX 2: Change post.username to post.author.username #}
+                            <a href="{{ url_for('posts.profile', user_id=post.user_id) }}" class="username">{{ post.author.username }}</a>
+                            <span class="timestamp">{{ post.created_at }}</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="post-content">
+                    <p>{{ post.content }}</p>
+                    {% if post.image_path %}
+                        <img src="{{ url_for('static', filename=post.image_path) }}" alt="Post image" class="post-image">
+                    {% endif %}
+                </div>
+                
+                <div class="post-actions">
+                    <button class="like-btn" onclick="likePost({{ post.id }})">
+                        ❤️ Like ({{ post.like_count }})
+                    </button>
+                    <button class="comment-btn" onclick="toggleComment({{ post.id }})">
+                        💬 Comment ({{ post.comment_count }})
+                    </button>
+                </div>
+                
+                <div id="comment-form-{{ post.id }}" class="comment-form" style="display: none;">
+                    <form method="POST" action="{{ url_for('posts.comment_post', post_id=post.id) }}">
+                        <input type="text" name="content" placeholder="Write a comment..." required>
+                        <button type="submit" class="btn btn-sm">Post</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="empty-state">
+                <p>No posts yet. Be the first to share something!</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+<script>
+function likePost(postId) {
+    fetch(`/like/${postId}`, {
+        method: 'POST'
+    })
+    .then(response => response.json())
+    .then(data => {
+        location.reload();
+    });
+}
+
+function toggleComment(postId) {
+    const form = document.getElementById(`comment-form-${postId}`);
+    form.style.display = form.style.display === 'none' ? 'block' : 'none';
+}
+</script>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-header">
+        <div class="profile-avatar">{{ user.username[0].upper() }}</div>
+        <div class="profile-info">
+            <h2>{{ user.username }}</h2>
+            <p>{{ user.email }}</p>
+            <p class="bio">{{ user.bio or "No bio yet" }}</p>
+            <p class="join-date">Joined: {{ user.created_at }}</p>
+        </div>
+    </div>
+    
+    <div class="profile-stats">
+        <div class="stat">
+            <span class="stat-number">{{ posts|length }}</span>
+            <span class="stat-label">Posts</span>
+        </div>
+    </div>
+    
+    <h3>Posts</h3>
+    <div class="posts-feed">
+        {% if posts %}
+            {% for post in posts %}
+            <div class="post-card">
+                <div class="post-content">
+                    <p>{{ post.content }}</p>
+                    {% if post.image_path %}
+                        <img src="{{ url_for('static', filename=post.image_path) }}" alt="Post image" class="post-image">
+                    {% endif %}
+                </div>
+                <div class="post-meta">
+                    <span>❤️ {{ post.like_count }} likes</span>
+                    <span>💬 {{ post.comment_count }} comments</span>
+                    <span class="timestamp">{{ post.created_at }}</span>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="empty-state">No posts yet.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
