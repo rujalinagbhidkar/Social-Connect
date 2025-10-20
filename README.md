@@ -32,35 +32,21 @@ The structure adheres to standard Flask best practices, utilizing Blueprints for
 social_media_app/
 
 ├── app.py
-
 ├── auth.py
-
 ├── database.py
-
 ├── posts.py
-
 ├── requirements.txt
-
 ├── static/
-
 │   └── css/
-
 │       └── style.css
 
 └── templates/
-
     ├── base.html
-    
     ├── create_post.html
-    
     ├── dashboard.html
-    
     ├── index.html
-    
     ├── login.html
-    
     ├── profile.html
-    
     └── register.html
 
 
