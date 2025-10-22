@@ -21,7 +21,7 @@ SocialConnect is a minimalist social media platform built using **Flask** and **
 * **ORM:** Flask-SQLAlchemy
 * **Authentication:** `werkzeug.security` (for password hashing)
 * **Templating:** Jinja2
-* **Frontend:** HTML5, CSS3, JavaScript (for simple interactions)
+* **Frontend:** HTML5, CSS3
 
 ***
 
